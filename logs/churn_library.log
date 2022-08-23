@@ -1,0 +1,2 @@
+root - INFO - Testing import_data: SUCCESS
+root - ERROR - Testing perform_eda: The folder images/eda is empty which means eda images haven't been saved properly.
