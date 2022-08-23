@@ -69,7 +69,10 @@ def test_encoder_helper(encoder_helper):
     try:
         category_lst = ['Gender', 'Education_Level', 'Marital_Status',
                         'Income_Category', 'Card_Category', 'Card_Category']
-        encoded_df = encoder_helper(import_data("./data/bank_data.csv"), category_lst, response='Churn')
+        encoded_df = encoder_helper(
+            import_data("./data/bank_data.csv"),
+            category_lst,
+            response='Churn')
         assert encoded_df.shape[0] > 0
         assert encoded_df.shape[1] > 0
         logging.info("Testing encoder_helper: SUCCESS")
@@ -138,5 +141,5 @@ if __name__ == "__main__":
     test_import(import_data)
     test_eda(perform_eda)
     test_encoder_helper(encoder_helper)
-    #test_perform_feature_engineering(perform_feature_engineering)
-    #test_train_models(train_models)
+    test_perform_feature_engineering(perform_feature_engineering)
+    test_train_models(train_models)
