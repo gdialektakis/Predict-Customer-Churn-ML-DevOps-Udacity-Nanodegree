@@ -202,7 +202,7 @@ def classification_report_image(y_train,
     """
 
     # Random Forest results
-    plt.figure(figsize=(5, 10))
+    plt.figure(figsize=(10, 10))
     # plt.text(0.01, 0.05, str(model.summary()), {'fontsize': 12}) old approach
     plt.text(0.01, 1.25, str('Random Forest Train'), {
              'fontsize': 10}, fontproperties='monospace')
@@ -216,7 +216,7 @@ def classification_report_image(y_train,
     plt.savefig('./images/results/rf_classification_report.png')
 
     # Logistic Regression Results
-    plt.figure(figsize=(5, 10))
+    plt.figure(figsize=(10, 10))
     plt.text(0.01, 1.25, str('Logistic Regression Train'),
              {'fontsize': 10}, fontproperties='monospace')
     plt.text(0.01, 0.05, str(classification_report(y_train, y_train_preds_lr)), {
@@ -250,10 +250,10 @@ def feature_importance_plot(model, X_data, output_pth):
     names = [X_data.columns[i] for i in indices]
 
     # Create plot
-    plt.figure(figsize=(20, 5))
+    plt.figure(figsize=(20, 15))
 
     # Create plot title
-    plt.title("Feature Importance")
+    plt.title("Feature Importances")
     plt.ylabel('Importance')
 
     # Add bars
@@ -261,7 +261,8 @@ def feature_importance_plot(model, X_data, output_pth):
 
     # Add feature names as x-axis labels
     plt.xticks(range(X_data.shape[1]), names, rotation=90)
-    plt.savefig(output_pth + 'feature_importance.png')
+    plt.savefig(output_pth + 'feature_importances.png')
+    plt.show()
 
 
 def train_models(X_train, X_test, y_train, y_test):
