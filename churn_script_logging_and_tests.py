@@ -69,10 +69,10 @@ def test_encoder_helper(encoder_helper):
     try:
         category_lst = ['Gender', 'Education_Level', 'Marital_Status',
                         'Income_Category', 'Card_Category', 'Card_Category']
-        encoded_df = encoder_helper(
-            import_data("./data/bank_data.csv"),
-            category_lst,
-            response='Churn')
+
+        data_df = import_data("./data/bank_data.csv")
+        encoded_df = encoder_helper(data_df, category_lst, response='Churn')
+
         assert encoded_df.shape[0] > 0
         assert encoded_df.shape[1] > 0
         logging.info("Testing encoder_helper: SUCCESS")
@@ -87,9 +87,12 @@ def test_perform_feature_engineering(perform_feature_engineering):
         test perform_feature_engineering
     """
     try:
+        category_lst = ['Gender', 'Education_Level', 'Marital_Status',
+                        'Income_Category', 'Card_Category', 'Card_Category']
+        encoded_df = encoder_helper(
+            import_data("./data/bank_data.csv"), category_lst, response='Churn')
+        X_train, X_test, y_train, y_test = perform_feature_engineering(encoded_df)
 
-        X_train, X_test, y_train, y_test = perform_feature_engineering(
-            import_data("./data/bank_data.csv"))
         assert X_train.shape[0] > 0
         assert X_train.shape[1] > 0
         assert y_train.shape[0] > 0
@@ -110,8 +113,11 @@ def test_train_models(train_models):
     """
 
     try:
-        X_train, X_test, y_train, y_test = perform_feature_engineering(
-            import_data("./data/bank_data.csv"))
+        category_lst = ['Gender', 'Education_Level', 'Marital_Status',
+                        'Income_Category', 'Card_Category', 'Card_Category']
+        encoded_df = encoder_helper(
+            import_data("./data/bank_data.csv"), category_lst, response='Churn')
+        X_train, X_test, y_train, y_test = perform_feature_engineering(encoded_df)
 
         train_models(X_train, X_test, y_train, y_test)
 

@@ -34,6 +34,8 @@ def import_data(pth):
             data_df: pandas dataframe
     """
     data_df = pd.read_csv(pth)
+    data_df['Churn'] = data_df['Attrition_Flag'].apply(
+        lambda val: 0 if val == "Existing Customer" else 1)
     print(data_df.head())
     return data_df
 
@@ -76,8 +78,6 @@ def perform_eda(data_df):
         'Avg_Utilization_Ratio'
     ]
 
-    data_df['Churn'] = data_df['Attrition_Flag'].apply(
-        lambda val: 0 if val == "Existing Customer" else 1)
 
     plt.figure(figsize=(20, 10))
     data_df['Churn'].hist()
@@ -351,6 +351,7 @@ if __name__ == "__main__":
         'Income_Category',
         'Card_Category',
         'Card_Category']
+
     encoded_df = encoder_helper(data_df, category_lst, response='Churn')
 
     X_train, X_test, y_train, y_test = perform_feature_engineering(encoded_df)
